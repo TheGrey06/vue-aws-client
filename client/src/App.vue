@@ -1,3 +1,20 @@
+<script>
+    import Navbar from "./components/Navbar.vue"
+    import Form from "./components/Form.vue"
+    export default {
+  components: {
+    Navbar,
+    Form
+  }
+}
+</script>
+
 <template>
-    <p class="text-2xl truncate">Hello</p>
+    <div>
+      <Navbar/>
+      <Form/>
+
+    </div>
+        
+ 
 </template>
