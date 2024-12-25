@@ -12,7 +12,9 @@
 <template>
     <div>
       <Navbar/>
-      <Form/>
+      <div class="flex flex-col items-center justify-center bg-gray-100 p-4">
+        <Form/>
+      </div>
 
     </div>
         

@@ -1,6 +1,12 @@
 <script>
   import axios from "axios";
+  import BucketCard from "./s3/BucketCard.vue";
+
     export default {
+      components: {
+        BucketCard
+      },
+
         data() {
             return {
                 accessKeyId: "",
@@ -31,6 +37,7 @@
 </script>
 
 <template>
+  <div>
     <div>
         <form @submit.prevent="fetchBuckets" class="w-full max-w-sm mt-10  ">
   <div class="md:flex md:items-center mb-6">
@@ -78,17 +85,15 @@
     </div>
   </div>
 </form> 
-<div v-if="buckets.length">
-      <h2>Bucket List</h2>
-      <ul>
-        <li v-for="bucket in buckets" :key="bucket.Name">
-          {{ bucket.Name }} (Created on: {{ new Date(bucket.CreationDate).toLocaleString() }})
-        </li>
-      </ul>
+</div>
+<div v-if="buckets.length" 
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+      <BucketCard v-for="bucket in buckets" :key="bucket.Name" :bucket="bucket" />
     </div>
     <div v-else-if="errorMessage">
-      <p class="error">{{ errorMessage }}</p>
+      <p class="text-red-500">{{ errorMessage }}</p>
     </div>
   </div>
+
 
 </template>
