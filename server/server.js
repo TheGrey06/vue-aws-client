@@ -1,5 +1,10 @@
 import express from "express";
 import cors from "cors";
+import session from "express-session";
+
+import login_route from "./router/auth/login.js";
+import logout_route from "./router/auth/logout.js";
+
 import get_all_buckets from "./router/s3/get_all_buckets.js";
 import post_one_bucket from "./router/s3/post_one_bucket.js";
 import delete_one_bucket from "./router/s3/delete_one_bucket.js";
@@ -11,6 +16,23 @@ import get_user_policy from "./router/iam/get_user_policy.js";
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+app.use(
+  session({
+    secret: "not-a-safe-secret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 5 * 60 * 1000,
+    },
+  })
+);
+
+app.options("/api/v1/auth", cors());
+app.use("/api/v1/", login_route);
+
+app.options("/api/v1/auth", cors());
+app.use("/api/v1/", logout_route);
 
 app.options("/api/v1/buckets", cors());
 app.use("/api/v1/", get_all_buckets);

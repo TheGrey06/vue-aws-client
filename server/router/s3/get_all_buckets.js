@@ -4,12 +4,15 @@ var router = express.Router();
 
 router.get("/buckets", async (req, res) => {
   try {
-    const accessKeyId = req.headers["x-aws-access-key-id"];
-    const secretAccessKey = req.headers["x-aws-access-key-secret"];
+    const credentials = req.session.awsCredentials;
 
-    if (!accessKeyId || !secretAccessKey) {
-      return res.status(400).json({ error: " AWS credentials are required" });
+    if (!credentials) {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized: Please log in first." });
     }
+
+    const { accessKeyId, secretAccessKey } = credentials;
 
     const s3Client = new S3Client({
       region: "eu-west-1",
@@ -19,9 +22,9 @@ router.get("/buckets", async (req, res) => {
       },
     });
 
-    const input = {};
-    const command = new ListBucketsCommand(input);
+    const command = new ListBucketsCommand({});
     const response = await s3Client.send(command);
+
     res.json(response);
   } catch (error) {
     console.error(error);
