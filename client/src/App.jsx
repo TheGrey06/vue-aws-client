@@ -11,17 +11,9 @@ function App() {
 
   return (
     <Router>
-      <Navbar/>
-      <nav>
-        {isLoggedIn && (
-          <ul>
-            <li><Link to="/buckets">Buckets</Link></li>
-            <li><Link to="/create-bucket">Create Bucket</Link></li>
-            <li><Link to="/delete-bucket">Delete Bucket</Link></li>
-            <li><button onClick={() => setIsLoggedIn(false)}>Log Out</button></li>
-          </ul>
-        )}
-      </nav>
+  
+      <Navbar isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />
+
       <Routes>
         <Route
           path="/login"
