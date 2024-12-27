@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate, Link } from "react-router-dom";
+import Login from "./pages/Login";
+import Buckets from "./pages/Buckets";
+import CreateBucket from "./pages/CreateBucket";
+import DeleteBucket from "./pages/DeleteBucket";
+import Navbar from "./components/Navbar";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Navbar/>
+      <nav>
+        {isLoggedIn && (
+          <ul>
+            <li><Link to="/buckets">Buckets</Link></li>
+            <li><Link to="/create-bucket">Create Bucket</Link></li>
+            <li><Link to="/delete-bucket">Delete Bucket</Link></li>
+            <li><button onClick={() => setIsLoggedIn(false)}>Log Out</button></li>
+          </ul>
+        )}
+      </nav>
+      <Routes>
+        <Route
+          path="/login"
+          element={!isLoggedIn ? <Login onLogin={() => setIsLoggedIn(true)} /> : <Navigate to="/buckets" />}
+        />
+        <Route
+          path="/buckets"
+          element={isLoggedIn ? <Buckets onLogout={() => setIsLoggedIn(false)} /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/create-bucket"
+          element={isLoggedIn ? <CreateBucket /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/delete-bucket"
+          element={isLoggedIn ? <DeleteBucket /> : <Navigate to="/login" />}
+        />
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
