@@ -3,17 +3,21 @@ import { BrowserRouter as Router, Route, Routes, Navigate, Link } from "react-ro
 import Login from "./pages/Login";
 import Buckets from "./pages/Buckets";
 import CreateBucket from "./pages/CreateBucket";
+import DeleteBucket from "./pages/DeleteBucket";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <Router>
+      <Navbar/>
       <nav>
         {isLoggedIn && (
           <ul>
             <li><Link to="/buckets">Buckets</Link></li>
             <li><Link to="/create-bucket">Create Bucket</Link></li>
+            <li><Link to="/delete-bucket">Delete Bucket</Link></li>
             <li><button onClick={() => setIsLoggedIn(false)}>Log Out</button></li>
           </ul>
         )}
@@ -30,6 +34,10 @@ function App() {
         <Route
           path="/create-bucket"
           element={isLoggedIn ? <CreateBucket /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/delete-bucket"
+          element={isLoggedIn ? <DeleteBucket /> : <Navigate to="/login" />}
         />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>

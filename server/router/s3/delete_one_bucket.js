@@ -4,15 +4,18 @@ var router = express.Router();
 
 router.delete("/bucket/:bucket_name", async (req, res) => {
   try {
-    // Extract AWS credentials from headers
-    const accessKeyId = req.headers["x-aws-access-key-id"];
-    const secretAccessKey = req.headers["x-aws-access-key-secret"];
+    // Retrieve AWS credentials from the session
+    const credentials = req.session.awsCredentials;
 
-    if (!accessKeyId || !secretAccessKey) {
-      return res.status(400).json({ error: "AWS credentials are required" });
+    if (!credentials) {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized: Please log in first." });
     }
 
-    // Initialize S3 client with dynamic credentials
+    const { accessKeyId, secretAccessKey } = credentials;
+
+    // Initialize S3 client with session credentials
     const s3Client = new S3Client({
       region: "eu-west-1",
       credentials: {
@@ -20,7 +23,6 @@ router.delete("/bucket/:bucket_name", async (req, res) => {
         secretAccessKey,
       },
     });
-
     // Extract bucket name and optional LocationConstraint from request body
     const { bucket_name } = req.params;
 
