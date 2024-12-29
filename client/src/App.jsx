@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 import Buckets from "./pages/Buckets";
 import CreateBucket from "./pages/CreateBucket";
 import DeleteBucket from "./pages/DeleteBucket";
+import BucketObjects from "./pages/BucketObjects";
+
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -30,6 +32,10 @@ function App() {
         <Route
           path="/delete-bucket"
           element={isLoggedIn ? <DeleteBucket /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/bucket-details/:bucketName"
+          element={isLoggedIn ? <BucketObjects /> : <Navigate to="/login" />}
         />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
