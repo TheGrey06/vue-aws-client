@@ -24,7 +24,7 @@ const Navbar = ({ isLoggedIn, onLogout, toggleSidebar }) => {
           </svg>
         </button>
       )}
-      <h1 className="text-2xl font-bold">My App</h1>
+      <h1 className="text-2xl font-extralight">Cold Lake</h1>
       {isLoggedIn && (
         <button
           onClick={onLogout}
