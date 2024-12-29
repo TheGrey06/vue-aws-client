@@ -30,7 +30,7 @@ function Buckets({ onLogout }) {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 max-w-screen-lg">
       <h2 className="text-3xl font-bold mb-6">S3 Buckets</h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
 

@@ -1,33 +1,32 @@
-// src/components/BucketCard.js
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { api, logout } from "../api";
-
-function Objects({onLogout}) {
-  const [objects, setObjects] = useState([]);
-  const [error, setError] =useState("");
-}
 
 function BucketCard({ bucket }) {
-
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-      <h3 className="text-xl font-semibold mb-4">{bucket.Name}</h3>
-      <p className="text-gray-600">Created: {bucket.CreationDate}</p>
-      <p className="text-gray-600">Region: {bucket.Region}</p>
-      <Link
-       to={`/bucket-details/${bucket.Name}`}
-       className="text-blue-500 hover:underline"
-      >
-      View Objects
-    </Link>
-    <Link
-          to={`/upload/${bucket.Name}`} // Navigate to the upload page for this bucket
-          className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700"
+    <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow border border-gray-200 max-w-sm mx-auto">
+      <p className="text-gray-800 text-lg font-semibold mb-2 truncate">{bucket.Name}</p>
+      <p className="text-gray-600 text-sm mb-4">
+        <strong>Created:</strong> {bucket.CreationDate}
+      </p>
+      <p className="text-gray-600 text-sm mb-4">
+        <strong>Region:</strong> {bucket.Region}
+      </p>
+
+      <div className="flex flex-col space-y-2">
+        <Link
+          to={`/bucket-details/${bucket.Name}`}
+          className="text-blue-500 hover:text-blue-700 font-medium transition-colors"
+        >
+          View Objects
+        </Link>
+
+        <Link
+          to={`/upload/${bucket.Name}`}
+          className="text-blue-500 hover:text-blue-700 font-medium transition-colors"
         >
           Upload File
         </Link>
-      {/* You can add more bucket details here */}
+      </div>
     </div>
   );
 }

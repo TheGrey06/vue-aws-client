@@ -31,10 +31,10 @@ function CreateBucket() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-slate-200 shadow-md rounded-lg mt-10">
-      <h2 className="text-3xl font-semibold text-center mb-6">Create S3 Bucket</h2>
+    <div className="max-w-2xl mx-auto p-8 bg-white shadow-xl rounded-lg mt-10">
+      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Create S3 Bucket</h2>
 
-      <form onSubmit={handleCreateBucket} className="space-y-4">
+      <form onSubmit={handleCreateBucket} className="space-y-6">
         <div>
           <label htmlFor="bucketName" className="block text-sm font-medium text-gray-700">
             Bucket Name
@@ -45,7 +45,7 @@ function CreateBucket() {
             value={bucketName}
             onChange={(e) => setBucketName(e.target.value)}
             required
-            className="w-full p-3 mt-1 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-4 mt-2 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300"
           />
         </div>
 
@@ -58,13 +58,13 @@ function CreateBucket() {
             id="locationConstraint"
             value={locationConstraint}
             onChange={(e) => setLocationConstraint(e.target.value)}
-            className="w-full p-3 mt-1 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-4 mt-2 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300"
           />
         </div>
 
         <button
           type="submit"
-          className="w-full py-3 mt-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none"
+          className="w-full py-4 mt-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none transition-all"
         >
           Create Bucket
         </button>

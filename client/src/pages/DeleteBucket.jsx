@@ -25,10 +25,10 @@ function DeleteBucket() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-3xl font-semibold text-center mb-6">Delete S3 Bucket</h2>
+    <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10 border  ">
+      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">Delete S3 Bucket</h2>
 
-      <form onSubmit={handleDeleteBucket} className="space-y-4">
+      <form onSubmit={handleDeleteBucket} className="space-y-6">
         <div>
           <label htmlFor="bucketName" className="block text-sm font-medium text-gray-700">
             Bucket Name
@@ -39,24 +39,24 @@ function DeleteBucket() {
             value={bucketName}
             onChange={(e) => setBucketName(e.target.value)}
             required
-            className="w-full p-3 mt-1 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500"
+            className="w-full p-4 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all"
           />
         </div>
 
         <button
           type="submit"
-          className="w-full py-3 mt-4 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 focus:outline-none"
+          className="w-full py-3 mt-6 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 focus:outline-none transition-all"
         >
           Delete Bucket
         </button>
       </form>
 
       {message && (
-        <p className="mt-4 text-green-600 text-center font-medium">{message}</p>
+        <p className="mt-6 text-green-600 text-center font-medium">{message}</p>
       )}
 
       {error && (
-        <p className="mt-4 text-red-600 text-center font-medium">{error}</p>
+        <p className="mt-6 text-red-600 text-center font-medium">{error}</p>
       )}
     </div>
   );
