@@ -24,4 +24,11 @@ export const getBucketObjects = async (bucketName) => {
   return api.get(`/bucket/${bucketName}/objects`);
 };
 
+export const putOneObject = async (bucketName, formData) => {
+  return api.put(`/bucket/${bucketName}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data", // Make sure the content-type is correct
+    },
+  });
+};
 export default api;

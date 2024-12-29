@@ -5,6 +5,8 @@ import Buckets from "./pages/Buckets";
 import CreateBucket from "./pages/CreateBucket";
 import DeleteBucket from "./pages/DeleteBucket";
 import BucketObjects from "./pages/BucketObjects";
+import UploadFiles from "./pages/UploadFiles"
+
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 
@@ -64,6 +66,10 @@ function App() {
               <Route
                 path="/bucket-details/:bucketName"
                 element={isLoggedIn ? <BucketObjects /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/upload/:bucketName" 
+                element={isLoggedIn ? <UploadFiles /> : <Navigate to="/login" />}
               />
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>

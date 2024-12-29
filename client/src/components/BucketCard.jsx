@@ -21,6 +21,12 @@ function BucketCard({ bucket }) {
       >
       View Objects
     </Link>
+    <Link
+          to={`/upload/${bucket.Name}`} // Navigate to the upload page for this bucket
+          className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700"
+        >
+          Upload File
+        </Link>
       {/* You can add more bucket details here */}
     </div>
   );
